@@ -4,13 +4,15 @@
     android:layout_height="match_parent">
 
     <EditTextPreference
+        android:defaultValue="@string/prefs_calories_default"
         android:inputType="number"
         android:key="@string/prefs_calories_key"
-        android:title="@string/prefs_calories_title"
-        android:defaultValue="@string/prefs_calories_default"/>
+        android:title="@string/prefs_calories_title" />
 
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="@string/prefs_nightmode_key"
-        android:summaryOff="Tryb dzienny" />
+        android:summaryOff="@string/prefs_nightmode_false"
+        android:summaryOn="@string/prefs_nightmode_true"
+        android:title="@string/prefs_nightmode_title" />
 </PreferenceScreen>
