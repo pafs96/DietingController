@@ -12,5 +12,5 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="@string/prefs_nightmode_key"
-        android:summaryOff="Tryb dzienny"
+        android:summaryOff="Tryb dzienny" />
 </PreferenceScreen>

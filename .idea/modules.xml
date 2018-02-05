@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DietingController.iml" filepath="$PROJECT_DIR$/DietingController.iml" />
+      <module fileurl="file://C:\Users\User\AndroidStudioProjects\DietingController\DietingController.iml" filepath="C:\Users\User\AndroidStudioProjects\DietingController\DietingController.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\User\AndroidStudioProjects\DietingController\app\app.iml" filepath="C:\Users\User\AndroidStudioProjects\DietingController\app\app.iml" />
     </modules>
   </component>
 </project>
