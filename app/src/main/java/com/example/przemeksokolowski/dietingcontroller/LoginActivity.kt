@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun login(login: String, password: String) {
         Toast.makeText(this, "Logowanie. (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
-        val url = "127.0.0.1:3000/login"
+        val url = "http://127.0.0.1:3000/login"
         val body = RequestBody.create(FORM, "session[index]=" + login + "&session[password]=" + password)
 
         httpPost(url, body,
@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     else if (json.has("token")) {
                         this.runOnUiThread() {
+                            Log.v("TOKEN RECEIVED: ", json["token"].toString())
                             Toast.makeText(this, json["token"] as String, Toast.LENGTH_SHORT).show()
                             val intent = android.content.Intent(this, MainActivity::class.java)
                             startActivity(intent)
