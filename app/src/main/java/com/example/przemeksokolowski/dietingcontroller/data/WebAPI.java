@@ -53,10 +53,10 @@ public interface WebAPI {
     Call<ResponseBody> createProduct(@Body Product product);
 
     @DELETE("products/{id}")
-    Call<ResponseBody> deleteProductById(@Path("id") int productId, @Body Product product);
+    Call<ResponseBody> deleteProductById(@Path("id") int productId);
 
     @PATCH("products/{id}")
-    Call<ResponseBody> updateProductById(@Path("id") int productId);
+    Call<ResponseBody> updateProductById(@Path("id") int productId, @Body Product product);
 
 
     /*
@@ -73,7 +73,6 @@ public interface WebAPI {
 
     @PATCH("meals/{id}")
     Call<ResponseBody> updateMealById(@Path("id") int mealId, @Body Meal meal);
-
 
 
     /*
@@ -110,37 +109,38 @@ public interface WebAPI {
     @PATCH("users/{id}")
     Call<ResponseBody> updateUserById(@Path("id") int userId, @Body User user);
 
+
     /*
     Activity types methods.
     */
     @GET("activity_types")
-    Call<List<WorkoutType>> getAllWorkoutTypes();
+    Call<List<WorkoutType>> getAllActivityTypes();
 
     @GET("activity_types/{id}")
-    Call<WorkoutType> getWorkoutTypesById(@Path("id") int workoutTypeId);
+    Call<WorkoutType> getActivityTypeById(@Path("id") int workoutTypeId);
 
     @POST("activity_types")
-    Call<ResponseBody> createWorkoutTypeById(@Body WorkoutType workoutType);
+    Call<ResponseBody> createActivityType(@Body WorkoutType workoutType);
 
     @DELETE("activity_types/{id}")
-    Call<ResponseBody> deleteWorkoutTypeById(@Path("id") int workoutTypeId);
+    Call<ResponseBody> deleteActivityTypeById(@Path("id") int workoutTypeId);
 
     @PATCH("activity_types/{id}")
-    Call<ResponseBody> updateWorkoutTypeById(@Path("id") int workoutTypeId, @Body WorkoutType workoutType);
+    Call<ResponseBody> updateActivityTypeById(@Path("id") int workoutTypeId, @Body WorkoutType workoutType);
 
 
     /*
     Activities methods.
     */
-    @GET("activities")
-    Call<List<Workout>> getAllWorkouts();
+    @GET("activities/{id}")
+    Call<Workout> getActivityById(@Path("id") int workoutId);
 
-    @POST("activities/{id}")
-    Call<ResponseBody> createWorkoutById(@Body Workout workoutId);
+    @POST("activities")
+    Call<ResponseBody> createActivity(@Body Workout workout);
 
     @DELETE("activities/{id}")
-    Call<ResponseBody> deleteWorkoutById(@Path("id") int workoutId);
+    Call<ResponseBody> deleteActivityById(@Path("id") int workoutId);
 
     @PATCH("activities/{id}")
-    Call<ResponseBody> updateWorkoutById(@Path("id") int workoutId, @Body Workout workout);
+    Call<ResponseBody> updateActivityById(@Path("id") int workoutId, @Body Workout workout);
 }
