@@ -8,12 +8,18 @@ public class Product {
     @SerializedName("id")
     @Expose
     private int id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("calories")
     @Expose
     private int calories;
+
+    @SerializedName("verified")
+    @Expose
+    private boolean verified;
 
     public int getId() {
         return id;
@@ -39,4 +45,11 @@ public class Product {
         this.calories = calories;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean varified) {
+        this.verified = verified;
+    }
 }

@@ -53,5 +53,4 @@ public class ChoosenProducts {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
 }

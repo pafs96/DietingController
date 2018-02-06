@@ -25,7 +25,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+/*
         Spinner spinner = (Spinner) findViewById(R.id.exercise_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -36,6 +36,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(this);
+        */
     }
 
     @Override
@@ -59,11 +60,6 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,

@@ -40,5 +40,4 @@ public class Meal {
     public void setMealType(int mealType) {
         this.mealType = mealType;
     }
-
 }

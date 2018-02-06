@@ -124,5 +124,4 @@ public class User {
     public void setDailyLimit(int dailyLimit) {
         this.dailyLimit = dailyLimit;
     }
-
 }

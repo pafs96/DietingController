@@ -13,6 +13,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -27,7 +28,7 @@ public interface WebAPI {
     Sessions methods
      */
     @POST("login")
-    Call<ResponseBody> login();
+    Call<ResponseBody> login(@Field("login") String login, @Field("password") String password);
 
     @DELETE("logout")
     Call<ResponseBody> delete();
@@ -74,6 +75,9 @@ public interface WebAPI {
     @PATCH("meals/{id}")
     Call<ResponseBody> updateMealById(@Path("id") int mealId, @Body Meal meal);
 
+    @GET("users/{id}/meals/{time}")
+    Call<List<Meal>> getMealsByUserIdAndTime(@Path("id") int userId, @Path("time") String date);
+
 
     /*
     Chosen products methods
@@ -89,6 +93,9 @@ public interface WebAPI {
 
     @PATCH("choosen_products/{id}")
     Call<ResponseBody> updateChoosenProductById(@Path("id") int choosenProductId, @Body ChoosenProducts choosenProduct);
+
+    @GET("meals/{id}/choosen_products")
+    Call<List<ChoosenProducts>> getChoosenProductsByMealId(@Path("id") int mealId);
 
 
     /*
@@ -143,4 +150,7 @@ public interface WebAPI {
 
     @PATCH("activities/{id}")
     Call<ResponseBody> updateActivityById(@Path("id") int workoutId, @Body Workout workout);
+
+    @GET("users/{id}/activities/{time}")
+    Call<List<Workout>> getActivitiesByUserIdAndTime(@Path("id") int userId, @Path("time") String date);
 }

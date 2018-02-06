@@ -9,17 +9,13 @@ public class Workout {
     @Expose
     private int id;
 
-    @SerializedName("activity_type")
-    @Expose
-    private int activityType;
-
     @SerializedName("time")
     @Expose
     private int time;
 
-    @SerializedName("user_id")
+    @SerializedName("activity_type")
     @Expose
-    private int userId;
+    private WorkoutType workoutType;
 
     public int getId() {
         return id;
@@ -27,14 +23,6 @@ public class Workout {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(int activityType) {
-        this.activityType = activityType;
     }
 
     public int getTime() {
@@ -45,12 +33,11 @@ public class Workout {
         this.time = time;
     }
 
-    public int getUserId() {
-        return userId;
+    public WorkoutType getWorkoutType() {
+        return workoutType;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setWorkoutType(WorkoutType workoutType) {
+        this.workoutType = workoutType;
     }
-
 }
