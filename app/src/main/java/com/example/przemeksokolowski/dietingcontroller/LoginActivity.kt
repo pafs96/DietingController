@@ -13,10 +13,10 @@ import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
 
-    val Client = OkHttpClient()
-    val FORM = MediaType.parse("application/x-www-form-urlencoded")
+    private val Client = OkHttpClient()
+    private val FORM = MediaType.parse("application/x-www-form-urlencoded")
 
-    fun httpPost(url: String, body: RequestBody, success: (response: Response) -> Unit, failure: () -> Unit) {
+    private fun httpPost(url: String, body: RequestBody, success: (response: Response) -> Unit, failure: () -> Unit) {
         val request = Request.Builder()
                 .url(url)
                 .post(body)
@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "Logowanie. ($login:$password)", Toast.LENGTH_SHORT).show()
         val url = "127.0.0.1:3000/login"
         val body = RequestBody.create(FORM, "session[index]=$login&session[password]=$password")
+        Log.v("Body body: ", body.toString())
 
         httpPost(url, body,
                 fun(response: Response){
@@ -65,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         if  (login_field.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
         }
 
         login_button.setOnClickListener {
