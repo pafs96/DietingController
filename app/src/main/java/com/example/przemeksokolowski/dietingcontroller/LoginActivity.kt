@@ -1,6 +1,5 @@
 package com.example.przemeksokolowski.dietingcontroller
 
-import android.hardware.camera2.CaptureFailure
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +12,10 @@ import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
 
-    private val Client = OkHttpClient()
-    private val FORM = MediaType.parse("application/x-www-form-urlencoded")
+    val Client = OkHttpClient()
+    val FORM = MediaType.parse("application/x-www-form-urlencoded")
 
-    private fun httpPost(url: String, body: RequestBody, success: (response: Response) -> Unit, failure: () -> Unit) {
+    fun httpPost(url: String, body: RequestBody, success: (response: Response) -> Unit, failure: () -> Unit) {
         val request = Request.Builder()
                 .url(url)
                 .post(body)
@@ -35,10 +34,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(login: String, password: String) {
-        Toast.makeText(this, "Logowanie. ($login:$password)", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Logowanie. (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
         val url = "127.0.0.1:3000/login"
-        val body = RequestBody.create(FORM, "session[index]=$login&session[password]=$password")
-        Log.v("Body body: ", body.toString())
+        val body = RequestBody.create(FORM, "session[index]=" + login + "&session[password]=" + password)
 
         httpPost(url, body,
                 fun(response: Response){
@@ -46,7 +44,9 @@ class LoginActivity : AppCompatActivity() {
                     val response_string = response.body()?.string()
                     val json = JSONObject(response_string)
                     if(json.has("message")) {
-                        Toast.makeText(this, json["message"] as String, Toast.LENGTH_SHORT).show()
+                        this.runOnUiThread {
+                            Toast.makeText(this, json["message"] as String, Toast.LENGTH_SHORT).show()
+                        }
                     }
                     else if (json.has("token")) {
                         this.runOnUiThread() {
