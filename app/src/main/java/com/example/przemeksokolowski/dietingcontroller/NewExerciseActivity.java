@@ -1,6 +1,7 @@
 package com.example.przemeksokolowski.dietingcontroller;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 public class NewExerciseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String mSelectedExercise;
+    private ProgressBar mLoadingIndicator;
+    private ConstraintLayout mConstraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,11 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mConstraintLayout = findViewById(R.id.exercise_constraint);
+        mLoadingIndicator = findViewById(R.id.pb_loading_meals_indicator);
+        showLoading();
+
 /*
         Spinner spinner = (Spinner) findViewById(R.id.exercise_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -37,6 +46,11 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
 
         spinner.setOnItemSelectedListener(this);
         */
+    }
+
+    private void showLoading() {
+        mConstraintLayout.setVisibility(View.INVISIBLE);
+        mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override

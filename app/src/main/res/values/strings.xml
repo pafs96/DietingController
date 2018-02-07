@@ -26,4 +26,6 @@
     <string name="add_exercise">Dodaj ćwiczenie</string>
     <string name="burned">Spalono</string>
     <string name="history">Historia</string>
+    <string name="login">login</string>
+    <string name="password">hasło</string>
 </resources>

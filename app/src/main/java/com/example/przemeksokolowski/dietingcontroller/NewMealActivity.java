@@ -1,18 +1,27 @@
 package com.example.przemeksokolowski.dietingcontroller;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 public class NewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private RecyclerView mRecyclerView;
+    private RecyclerViewAdapter mRecyclerViewAdapter;
+    private ProgressBar mLoadingIndicator;
+    private ConstraintLayout mConstraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +32,29 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Spinner spinner = (Spinner) findViewById(R.id.meal_spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        Spinner spinner = findViewById(R.id.meal_spinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.meal_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
+
+        mLoadingIndicator = findViewById(R.id.pb_loading_meals_indicator);
+        mConstraintLayout = findViewById(R.id.meal_constraint);
+
+        mRecyclerViewAdapter = new RecyclerViewAdapter(this);
+
+        mRecyclerView = findViewById(R.id.products_recyclerview);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+
+        showLoading();
+    }
+
+    private void showLoading() {
+        mConstraintLayout.setVisibility(View.INVISIBLE);
+        mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -54,8 +76,8 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
                 startActivity(new Intent(NewMealActivity.this, SettingsActivity.class));
                 return true;
             //case R.id.action_new_product:
-                //startActivity(new Intent(NewMealActivity.this, HistoryActivity.class));
-                //return true;
+            //startActivity(new Intent(NewMealActivity.this, HistoryActivity.class));
+            //return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -1,17 +1,20 @@
 package com.example.przemeksokolowski.dietingcontroller;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.github.clans.fab.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton mNewExerciseFab, mNewMealFab;
+    private ProgressBar mLoadingIndicator;
+    private ConstraintLayout mConstraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +24,19 @@ public class MainActivity extends AppCompatActivity {
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mNewExerciseFab = (FloatingActionButton) findViewById(R.id.new_exercise_fab);
-        mNewMealFab = (FloatingActionButton) findViewById(R.id.new_meal_fab);
+        FloatingActionButton newExerciseFab = findViewById(R.id.new_exercise_fab);
+        FloatingActionButton newMealFab = findViewById(R.id.new_meal_fab);
+        newExerciseFab.setOnClickListener(clickListener);
+        newMealFab.setOnClickListener(clickListener);
 
-        mNewExerciseFab.setOnClickListener(clickListener);
-        mNewMealFab.setOnClickListener(clickListener);
+        mConstraintLayout = findViewById(R.id.main_constraint);
+        mLoadingIndicator = findViewById(R.id.pb_loading_main_indicator);
+        showLoading();
+    }
+
+    private void showLoading() {
+        mConstraintLayout.setVisibility(View.INVISIBLE);
+        mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
