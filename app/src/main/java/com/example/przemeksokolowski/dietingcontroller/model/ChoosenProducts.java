@@ -6,9 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class ChoosenProducts {
 
-    @SerializedName("id")
-    @Expose
-    private int id;
+    public ChoosenProducts(int productId, int mealId, int weight) {
+        this.productId = productId;
+        this.mealId = mealId;
+        this.weight = weight;
+    }
 
     @SerializedName("product_id")
     @Expose
@@ -21,14 +23,6 @@ public class ChoosenProducts {
     @SerializedName("weight")
     @Expose
     private int weight;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getProductId() {
         return productId;

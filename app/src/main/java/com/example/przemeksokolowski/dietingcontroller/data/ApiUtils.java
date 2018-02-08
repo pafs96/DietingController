@@ -59,4 +59,14 @@ public class ApiUtils {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+    public static Intent createIntentWithLoggedUserId(Context context, Class clas, int id) {
+        Intent intent = new Intent(context, clas);
+        intent.putExtra("logged_user_id", id);
+        return intent;
+    }
+
+    public static int getUserIdFromIntent(Intent intent) {
+        return intent.getExtras().getInt("logged_user_id");
+    }
 }

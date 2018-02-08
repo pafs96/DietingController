@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 
+import com.example.przemeksokolowski.dietingcontroller.data.ApiUtils;
+
 public class HistoryActivity extends AppCompatActivity {
 
     @Override
@@ -24,7 +26,8 @@ public class HistoryActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Intent openSummaryIntent = new Intent(HistoryActivity.this, SummaryActivity.class);
+                Intent openSummaryIntent = ApiUtils.createIntentWithLoggedUserId(
+                        HistoryActivity.this, SummaryActivity.class, ApiUtils.getUserIdFromIntent(getIntent()));
                 openSummaryIntent.putExtra("selected_date", year + "-" + month + "-" + dayOfMonth);
                 startActivity(openSummaryIntent);
             }

@@ -19,6 +19,7 @@
         android:layout_height="match_parent">
 
         <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/progressview"
             android:layout_width="240dp"
             android:layout_height="240dp"
             app:cpv_barColor="#3F51B5"

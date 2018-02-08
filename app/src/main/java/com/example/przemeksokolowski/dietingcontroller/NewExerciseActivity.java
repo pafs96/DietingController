@@ -76,10 +76,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         mSelectedExercise = (String) parent.getItemAtPosition(pos);
         Log.v("NewExerciseActivity", mSelectedExercise);
     }

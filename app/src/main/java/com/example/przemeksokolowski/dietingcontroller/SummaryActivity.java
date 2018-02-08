@@ -57,11 +57,11 @@ public class SummaryActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             mSelectedDate = getIntent().getExtras().getString("selected_date");
-            mLoggedUserId = getIntent().getExtras().getInt("logged_user_id");
         } else {
             mSelectedDate = (String) savedInstanceState.getSerializable("selected_date");
-            mLoggedUserId = (int) savedInstanceState.getSerializable("logged_user_id");
         }
+
+        mLoggedUserId = ApiUtils.getUserIdFromIntent(getIntent());
 
         getSupportActionBar().setTitle(mSelectedDate);
 

@@ -5,62 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
+import com.example.przemeksokolowski.dietingcontroller.data.ApiUtils
+import com.example.przemeksokolowski.dietingcontroller.data.WebAPI
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
-
-    val Client = OkHttpClient()
-    val FORM = MediaType.parse("application/x-www-form-urlencoded")
-
-    fun httpPost(url: String, body: RequestBody, success: (response: Response) -> Unit, failure: () -> Unit) {
-        val request = Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Accept", "application/json")
-                .build()
-
-        Client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call?, e: IOException?) {
-                failure()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                success(response)
-            }
-        })
-    }
-
-    fun login(login: String, password: String) {
-        Toast.makeText(this, "Logowanie. (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
-        val url = "http://127.0.0.1:3000/login"
-        val body = RequestBody.create(FORM, "session[index]=" + login + "&session[password]=" + password)
-
-        httpPost(url, body,
-                fun(response: Response){
-                    Log.v("INFO", "Succeeded")
-                    val response_string = response.body()?.string()
-                    val json = JSONObject(response_string)
-                    if(json.has("message")) {
-                        this.runOnUiThread {
-                            Toast.makeText(this, json["message"] as String, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    else if (json.has("token")) {
-                        this.runOnUiThread() {
-                            Log.v("TOKEN RECEIVED: ", json["token"].toString())
-                            Toast.makeText(this, json["token"] as String, Toast.LENGTH_SHORT).show()
-                            val intent = android.content.Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                },
-                fun(){
-                    Log.v("INFO", "Failed")
-                })
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +25,21 @@ class LoginActivity : AppCompatActivity() {
         login_button.setOnClickListener {
             val login = login_field.text.toString()
             val password = password_field.text.toString()
-            login(login, password)
+
+            val response = ApiUtils.getWebApi().login(login, password).execute()
+
+            if (response.isSuccessful) {
+                val userId = response.body()!!.id
+                if (userId == -1) {
+                    login_field.error = "Incorrect data!"
+                    password_field.error = "Incorrect data!"
+                } else {
+                    startActivity(ApiUtils.createIntentWithLoggedUserId(
+                            applicationContext, parent.javaClass, userId))
+                }
+            } else {
+                ApiUtils.noApiConnectionDialog(applicationContext, parent)
+            }
         }
 
 

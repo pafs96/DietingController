@@ -69,7 +69,7 @@ public interface WebAPI {
     Call<Meal> getMealById(@Path("id") int mealId);
 
     @POST("meals")
-    Call<ResponseBody> createMeal(@Body Meal meal);
+    Call<Meal> createMeal(@Field("user_id") int userId, @Field("meal_type") int mealType);
 
     @DELETE("meals/{id}")
     Call<ResponseBody> deleteMealById(@Path("id") int mealId);
