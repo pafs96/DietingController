@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.przemeksokolowski.dietingcontroller.data.ApiUtils;
@@ -54,12 +54,26 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this);
+        final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(this);
 
         RecyclerView recyclerView = findViewById(R.id.products_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                choosenProducts.remove(viewHolder.getAdapterPosition());
+                recyclerViewAdapter.swapList(choosenProducts);
+            }
+        }).attachToRecyclerView(recyclerView);
+
 
         Button addProductBtn = findViewById(R.id.add_product_button);
         addProductBtn.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +149,7 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
             case R.id.action_settings:
                 startActivity(new Intent(NewMealActivity.this, SettingsActivity.class));
                 return true;
+                //TODO(11) Dodawanie produktów
             //case R.id.action_new_product:
             //startActivity(new Intent(NewMealActivity.this, HistoryActivity.class));
             //return true;

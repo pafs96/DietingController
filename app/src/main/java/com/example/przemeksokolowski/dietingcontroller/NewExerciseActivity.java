@@ -34,6 +34,9 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         mLoadingIndicator = findViewById(R.id.pb_loading_meals_indicator);
         showLoading();
 
+        // TODO(8) spinner i podłączenie do niego danych z API (przykład)
+        // TODO(9) aktualizacja napisu (sprawdzanie wpisanych cyfr?)
+        // TODO(10) Zapis do API
 /*
         Spinner spinner = (Spinner) findViewById(R.id.exercise_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout

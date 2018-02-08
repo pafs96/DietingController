@@ -36,6 +36,8 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Adapt
     public void onBindViewHolder(AdapterViewHolder holder, int position) {
 
         // TODO(1) bindowanie widoków -> w zależności od tego co będzie zwracało API!
+
+        holder.itemView.setTag(position);
     }
 
     @Override
