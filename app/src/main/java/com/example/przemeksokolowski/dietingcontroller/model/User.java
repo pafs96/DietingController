@@ -7,7 +7,7 @@ public class User {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    private Integer id;
 
     @SerializedName("login")
     @Expose
@@ -31,11 +31,11 @@ public class User {
 
     @SerializedName("height")
     @Expose
-    private int height;
+    private Integer height;
 
     @SerializedName("gender")
     @Expose
-    private int gender;
+    private Integer gender;
 
     @SerializedName("birth_date")
     @Expose
@@ -43,9 +43,9 @@ public class User {
 
     @SerializedName("daily_limit")
     @Expose
-    private int dailyLimit;
+    private Integer dailyLimit;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -93,7 +93,7 @@ public class User {
         this.password = password;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
@@ -101,7 +101,7 @@ public class User {
         this.height = height;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
@@ -117,7 +117,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public int getDailyLimit() {
+    public Integer getDailyLimit() {
         return dailyLimit;
     }
 

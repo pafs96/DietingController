@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.przemeksokolowski.dietingcontroller.model.ChoosenProducts;
+import com.example.przemeksokolowski.dietingcontroller.model.Product;
+import com.example.przemeksokolowski.dietingcontroller.model.ProductListItem;
 
 import java.util.ArrayList;
 
@@ -16,16 +18,14 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Adapt
 
     private Context mContext;
 
+    private ArrayList<ProductListItem> mChoosenProductsList;
+
     RecyclerViewAdapter(@NonNull Context context) {
         mContext = context;
     }
 
-    private ArrayList<ChoosenProducts> mArrayList;
-
-
     @Override
     public AdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_item, parent, false);
         view.setFocusable(true);
 
@@ -34,34 +34,33 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Adapt
 
     @Override
     public void onBindViewHolder(AdapterViewHolder holder, int position) {
-
-        // TODO(1) bindowanie widoków -> w zależności od tego co będzie zwracało API!
+        holder.nameTextView.setText(mChoosenProductsList.get(position).getName());
+        holder.weightTextView.setText(mChoosenProductsList.get(position).getWeight());
 
         holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        if (mArrayList == null)
+        if (mChoosenProductsList == null)
             return 0;
         else
-            return mArrayList.size();
+            return mChoosenProductsList.size();
     }
 
-    void swapList(ArrayList<ChoosenProducts> newList) {
-        mArrayList = newList;
+    void swapChoosenProductsList(ArrayList<ProductListItem> newList) {
+        mChoosenProductsList = newList;
         notifyDataSetChanged();
     }
 
     class AdapterViewHolder extends RecyclerView.ViewHolder {
 
-        final TextView nameTextView, caloriesTextView, weightTextView;
+        final TextView nameTextView, weightTextView;
 
         AdapterViewHolder(View itemView) {
             super(itemView);
 
             nameTextView = itemView.findViewById(R.id.product_name_tv);
-            caloriesTextView = itemView.findViewById(R.id.product_calories_tv);
             weightTextView = itemView.findViewById(R.id.product_weight_tv);
         }
     }

@@ -21,6 +21,14 @@ public class Product {
     @Expose
     private boolean verified;
 
+    public Product(int id, String name, int calories, boolean verified) {
+        this.id = id;
+        this.name = name;
+        this.calories = calories;
+        this.verified = verified;
+    }
+
+
     public int getId() {
         return id;
     }

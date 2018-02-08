@@ -53,7 +53,7 @@ public interface WebAPI {
     Call<Product> getProductById(@Path("id") int productId);
 
     @POST("products")
-    Call<ResponseBody> createProduct(@Body Product product);
+    Call<Product> createProduct(@Field("name") String name, @Field("calories") int calories);
 
     @DELETE("products/{id}")
     Call<ResponseBody> deleteProductById(@Path("id") int productId);
@@ -107,7 +107,7 @@ public interface WebAPI {
     Call<User> getUserById(@Path("id") int userId);
 
     @POST("users")
-    Call<ResponseBody> createUser(@Body User user);
+    Call<User> createUser(@Body User user);
 
     @DELETE("users/{id}")
     Call<ResponseBody> deleteUserById(@Path("id") int userId);
@@ -126,7 +126,7 @@ public interface WebAPI {
     Call<WorkoutType> getActivityTypeById(@Path("id") int workoutTypeId);
 
     @POST("activity_types")
-    Call<ResponseBody> createActivityType(@Body WorkoutType workoutType);
+    Call<WorkoutType> createActivityType(@Body WorkoutType workoutType);
 
     @DELETE("activity_types/{id}")
     Call<ResponseBody> deleteActivityTypeById(@Path("id") int workoutTypeId);
@@ -142,7 +142,7 @@ public interface WebAPI {
     Call<Workout> getActivityById(@Path("id") int workoutId);
 
     @POST("activities")
-    Call<ResponseBody> createActivity(@Body Workout workout);
+    Call<Workout> createActivity(@Body Workout workout);
 
     @DELETE("activities/{id}")
     Call<ResponseBody> deleteActivityById(@Path("id") int workoutId);
