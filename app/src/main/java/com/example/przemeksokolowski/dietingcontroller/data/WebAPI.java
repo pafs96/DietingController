@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -29,6 +30,7 @@ public interface WebAPI {
     /*
     Sessions methods
      */
+    @FormUrlEncoded
     @POST("login")
     Call<LoginData> login(@Field("login") String login, @Field("password") String password);
 
@@ -52,6 +54,7 @@ public interface WebAPI {
     @GET("products/{id}")
     Call<Product> getProductById(@Path("id") int productId);
 
+    @FormUrlEncoded
     @POST("products")
     Call<Product> createProduct(@Field("name") String name, @Field("calories") int calories);
 
@@ -68,6 +71,7 @@ public interface WebAPI {
     @GET("meals/{id}")
     Call<Meal> getMealById(@Path("id") int mealId);
 
+    @FormUrlEncoded
     @POST("meals")
     Call<Meal> createMeal(@Field("user_id") int userId, @Field("meal_type") int mealType);
 
