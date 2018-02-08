@@ -23,6 +23,10 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
     private ProgressBar mLoadingIndicator;
     private ConstraintLayout mConstraintLayout;
 
+
+
+    private int mealType = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +52,6 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-
-        showLoading();
-    }
-
-    private void showLoading() {
-        mConstraintLayout.setVisibility(View.INVISIBLE);
-        mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -85,11 +82,10 @@ public class NewMealActivity extends AppCompatActivity implements AdapterView.On
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
+        mealType = pos + 1;
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
+        mealType = 1;
     }
 }

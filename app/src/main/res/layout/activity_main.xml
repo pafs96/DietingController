@@ -8,8 +8,8 @@
 
     <ProgressBar
         android:id="@+id/pb_loading_main_indicator"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:visibility="invisible" />
 
@@ -21,10 +21,6 @@
         <at.grabner.circleprogress.CircleProgressView
             android:layout_width="240dp"
             android:layout_height="240dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:cpv_barColor="#3F51B5"
             app:cpv_innerContourColor="#FFFFFF"
             app:cpv_outerContourColor="#FFFFFF"
@@ -35,7 +31,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.372"
             tools:cpv_value="50" />
 
         <com.github.clans.fab.FloatingActionMenu

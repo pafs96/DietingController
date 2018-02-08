@@ -1,11 +1,13 @@
 package com.example.przemeksokolowski.dietingcontroller;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -17,6 +19,16 @@ public class HistoryActivity extends AppCompatActivity {
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CalendarView calendarView = findViewById(R.id.calendar_view);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Intent openSummaryIntent = new Intent(HistoryActivity.this, SummaryActivity.class);
+                openSummaryIntent.putExtra("selected_date", year + "-" + month + "-" + dayOfMonth);
+                startActivity(openSummaryIntent);
+            }
+        });
     }
 
     @Override

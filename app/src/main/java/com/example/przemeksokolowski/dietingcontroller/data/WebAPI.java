@@ -1,7 +1,9 @@
 package com.example.przemeksokolowski.dietingcontroller.data;
 
 import com.example.przemeksokolowski.dietingcontroller.model.ChoosenProducts;
+import com.example.przemeksokolowski.dietingcontroller.model.LoginData;
 import com.example.przemeksokolowski.dietingcontroller.model.Meal;
+import com.example.przemeksokolowski.dietingcontroller.model.MealWithChoosenProducts;
 import com.example.przemeksokolowski.dietingcontroller.model.Product;
 import com.example.przemeksokolowski.dietingcontroller.model.User;
 import com.example.przemeksokolowski.dietingcontroller.model.Workout;
@@ -28,7 +30,7 @@ public interface WebAPI {
     Sessions methods
      */
     @POST("login")
-    Call<ResponseBody> login(@Field("login") String login, @Field("password") String password);
+    Call<LoginData> login(@Field("login") String login, @Field("password") String password);
 
     @DELETE("logout")
     Call<ResponseBody> delete();
@@ -76,7 +78,7 @@ public interface WebAPI {
     Call<ResponseBody> updateMealById(@Path("id") int mealId, @Body Meal meal);
 
     @GET("users/{id}/meals/{time}")
-    Call<List<Meal>> getMealsByUserIdAndTime(@Path("id") int userId, @Path("time") String date);
+    Call<List<MealWithChoosenProducts>> getMealsByUserIdAndTime(@Path("id") int userId, @Path("time") String date);
 
 
     /*
@@ -93,9 +95,6 @@ public interface WebAPI {
 
     @PATCH("choosen_products/{id}")
     Call<ResponseBody> updateChoosenProductById(@Path("id") int choosenProductId, @Body ChoosenProducts choosenProduct);
-
-    @GET("meals/{id}/choosen_products")
-    Call<List<ChoosenProducts>> getChoosenProductsByMealId(@Path("id") int mealId);
 
 
     /*

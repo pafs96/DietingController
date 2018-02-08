@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Meal {
+public class MealWithChoosenProducts {
 
     @SerializedName("id")
     @Expose
     private int id;
 
-    @SerializedName("user_id")
-    @Expose
-    private int userId;
-
     @SerializedName("meal_type")
     @Expose
     private int mealType;
+
+    @SerializedName("choosen_products")
+    @Expose
+    private List<ChoosenProductsUsedToGetMeals> choosenProducts;
 
     public int getId() {
         return id;
@@ -27,19 +27,19 @@ public class Meal {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public int getMealType() {
         return mealType;
     }
 
     public void setMealType(int mealType) {
         this.mealType = mealType;
+    }
+
+    public List<ChoosenProductsUsedToGetMeals> getChoosenProducts() {
+        return choosenProducts;
+    }
+
+    public void setChoosenProducts(List<ChoosenProductsUsedToGetMeals> choosenProducts) {
+        this.choosenProducts = choosenProducts;
     }
 }
